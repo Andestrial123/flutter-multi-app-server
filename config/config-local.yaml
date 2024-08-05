@@ -3,7 +3,7 @@ app:
 
 logger:
   level: DEBUG
-  base_name: sequence-api
+  base_name: multi-api
 
 db:
   # docker
