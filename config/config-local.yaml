@@ -6,8 +6,7 @@ logger:
   base_name: multi-api
 
 db:
-  # docker
-  # host: db
+  # for running in local docker host must be db instead of localhost
   host: localhost
   name: multi-app-db
   port: 5432
