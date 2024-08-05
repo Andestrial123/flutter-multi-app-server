@@ -1,0 +1,24 @@
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    env_file:
+      - .env_local
+    ports:
+      - "5432:5432"
+  api:
+    build:
+      context: .
+    container_name: multi-app-api
+    env_file:
+      - .env_local
+    restart: always
+    volumes:
+      - .:/app
+    environment:
+      PORT: 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
