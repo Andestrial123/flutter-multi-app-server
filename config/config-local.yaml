@@ -1,0 +1,13 @@
+app:
+  debug: true
+
+logger:
+  level: DEBUG
+  base_name: sequence-api
+
+db:
+  # docker
+  # host: db
+  host: localhost
+  name: multi-app-db
+  port: 5432
