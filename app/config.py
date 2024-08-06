@@ -1,3 +1,4 @@
+import json
 import logging.config
 import os
 from enum import Enum
@@ -36,6 +37,9 @@ class ConfigProvider:
         self.__env = Environ[os.environ.get('ENV', 'local')]
         self.base_path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
         self.config_path = os.path.join(self.base_path, 'config')
+
+        firebase_creds_str = os.environ.get('FIREBASE_CREDS')
+        self.__firebase_creds = json.loads(firebase_creds_str)
 
         filename = os.path.join(self.config_path, f'config-{self.env.name}.yaml')
         with open(filename, 'r') as f:
@@ -82,6 +86,10 @@ class ConfigProvider:
         default = self.__cfg['db']['name']
 
         return os.getenv("POSTGRES_DB", default)
+
+    @property
+    def firebase_creds(self) -> dict:
+        return self.__firebase_creds
 
 
 config = ConfigProvider()

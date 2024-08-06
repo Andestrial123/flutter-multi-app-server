@@ -1,7 +1,9 @@
 import logging
 
+import firebase_admin
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from firebase_admin import credentials
 from starlette.responses import JSONResponse
 
 from app.config import config, postgres_config
@@ -55,6 +57,9 @@ async def exception_handler(request: Request, call_next):
 async def start():
     db.setup(postgres_config)
     await run_async_upgrade()
+
+    cred = credentials.Certificate(config.firebase_creds)
+    firebase_admin.initialize_app(cred)
 
 
 @app.get("/health", tags=["Internal"])
