@@ -1,7 +1,7 @@
 import uuid
-from typing import Optional
+from typing import Optional, List
 
-from sqlmodel import SQLModel, Field
+from sqlmodel import SQLModel, Field, Relationship
 
 
 class CategoryCreateBase(SQLModel):
@@ -18,4 +18,4 @@ class CategoryReadBase(CategoryUpdateBase):
 
 
 class Category(CategoryReadBase, table=True):
-    pass
+    products: List["Product"] = Relationship(back_populates="category")

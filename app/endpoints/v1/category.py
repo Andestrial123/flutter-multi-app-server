@@ -26,7 +26,7 @@ async def get_categories(controller: CategoryController = Depends(CategoryContro
 async def get_category(
         category_id: uuid.UUID,
         controller: CategoryController = Depends(CategoryController)) -> CategoryGetSchema:
-    category = await controller.get_by_id(category_id)
+    category = await controller.get_by_id(category_id=category_id)
 
     if not category:
         raise HTTPException(status_code=404, detail="Category not found")
