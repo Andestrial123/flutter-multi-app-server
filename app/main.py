@@ -9,7 +9,6 @@ from app.endpoints import metadata
 from app.endpoints.v1 import router_v1
 from app.models.db import db
 from app.models.db.migrations.upgrade import run_async_upgrade
-from app.utils.request import set_body
 
 app = FastAPI(
     title='Multi App API',
@@ -38,7 +37,6 @@ async def exception_handler(request: Request, call_next):
     body = await request.body()
 
     try:
-        await set_body(request, body)
         return await call_next(request)
 
     except Exception as ex:
