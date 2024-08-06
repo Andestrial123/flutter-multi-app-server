@@ -1,11 +1,15 @@
-from fastapi import FastAPI
+import logging
+
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.responses import JSONResponse
 
 from app.config import config, postgres_config
 from app.endpoints import metadata
 from app.endpoints.v1 import router_v1
 from app.models.db import db
 from app.models.db.migrations.upgrade import run_async_upgrade
+from app.utils.request import set_body
 
 app = FastAPI(
     title='Multi App API',
@@ -27,6 +31,27 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def exception_handler(request: Request, call_next):
+    body = await request.body()
+
+    try:
+        await set_body(request, body)
+        return await call_next(request)
+
+    except Exception as ex:
+        logger = logging.getLogger(__name__)
+        logger.exception(f"Exception: {request.method} {request.url}, body: {body} -> [{ex}]")
+
+        return JSONResponse(
+            status_code=500,
+            content={
+                "detail": f"Internal Server Error",
+            },
+        )
+
 
 @app.on_event("startup")
 async def start():
