@@ -11,6 +11,26 @@ router_v1 = APIRouter(
         404: {
             "description": "Not Found"
         },
+        422: {
+            "description": "Validation Error",
+            "content": {
+                "application/json": {
+                    "example":
+                        {
+                            "detail": [
+                                {
+                                    "loc": [
+                                        "string",
+                                        0
+                                    ],
+                                    "msg": "string",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                }
+            }
+        },
         500: {
             "description": "Internal Server Error"
         },
