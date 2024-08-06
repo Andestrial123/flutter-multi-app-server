@@ -7,12 +7,15 @@ from app.controllers.category import CategoryController
 from app.endpoints.schemas.category import CategoryGetSchema
 from app.endpoints.v1 import router_v1
 from app.utils.file import get_name
+from app.utils.lang import accept_language_header
 
 TAG = get_name(__file__)
 
 
 @router_v1.get("/categories", tags=[TAG])
-async def get_categories(controller: CategoryController = Depends(CategoryController)) -> List[CategoryGetSchema]:
+async def get_categories(
+        lang: str = accept_language_header,
+        controller: CategoryController = Depends(CategoryController)) -> List[CategoryGetSchema]:
     categories = await controller.get_all()
     response = []
 
@@ -25,6 +28,7 @@ async def get_categories(controller: CategoryController = Depends(CategoryContro
 @router_v1.get("/category/{category_id}", tags=[TAG])
 async def get_category(
         category_id: uuid.UUID,
+        lang: str = accept_language_header,
         controller: CategoryController = Depends(CategoryController)) -> CategoryGetSchema:
     category = await controller.get_by_id(category_id=category_id)
 

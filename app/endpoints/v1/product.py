@@ -7,12 +7,14 @@ from app.controllers.product import ProductController
 from app.endpoints.schemas.product import ProductGetSchema
 from app.endpoints.v1 import router_v1
 from app.utils.file import get_name
+from app.utils.lang import accept_language_header
 
 TAG = get_name(__file__)
 
 
 @router_v1.get("/products", tags=[TAG])
 async def get_products(
+        lang: str = accept_language_header,
         category_id: Optional[uuid.UUID] = None,
         search: Optional[str] = None,
         controller: ProductController = Depends(ProductController),
@@ -30,6 +32,7 @@ async def get_products(
 
 @router_v1.get("/products/{product_id}", tags=[TAG])
 async def get_product(product_id: uuid.UUID,
+                      lang: str = accept_language_header,
                       controller: ProductController = Depends(ProductController)) -> ProductGetSchema:
     product = await controller.get_by_id(product_id=product_id)
 

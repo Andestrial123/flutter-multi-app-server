@@ -11,6 +11,7 @@ from app.endpoints import metadata
 from app.endpoints.v1 import router_v1
 from app.models.db import db
 from app.models.db.migrations.upgrade import run_async_upgrade
+from app.utils.translation.lang_middleware import LanguageMiddleware
 
 app = FastAPI(
     title='Multi App API',
@@ -33,6 +34,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.add_middleware(LanguageMiddleware)
 
 @app.middleware("http")
 async def exception_handler(request: Request, call_next):
