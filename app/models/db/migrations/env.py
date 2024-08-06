@@ -19,8 +19,10 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 from sqlmodel import SQLModel
 
-
 from app.models.category import Category
+from app.models.enums import *
+from app.models.ingredient import Ingredient
+from app.models.product import Product, ProductIngredientLink
 
 target_metadata = SQLModel.metadata
 
