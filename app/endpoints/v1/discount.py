@@ -26,8 +26,7 @@ async def get_discounts(
 @router_v1.get("/discount/{discount_id}", tags=[TAG])
 async def get_discount(
         discount_id: uuid.UUID,
-        controller: DiscountController = Depends(DiscountController)
-) -> DiscountGetSchema:
+        controller: DiscountController = Depends(DiscountController)) -> DiscountGetSchema:
     discount = await controller.get_by_id(discount_id)
 
     if not discount:
