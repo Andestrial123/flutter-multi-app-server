@@ -8,7 +8,7 @@ from app.models.product import ProductIngredientLink, Product
 
 class IngredientCreateBase(SQLModel):
     name: str
-    image_link: str
+    image_url: str
 
 
 class IngredientUpdateBase(IngredientCreateBase):

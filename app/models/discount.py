@@ -7,7 +7,7 @@ from app.models.enums import DiscountOpenType
 
 
 class DiscountCreateBase(SQLModel):
-    image_path: str
+    image_url: str
     open_type: DiscountOpenType
     link: str
 
