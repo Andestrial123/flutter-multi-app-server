@@ -23,6 +23,7 @@ from app.models.category import Category
 from app.models.enums import *
 from app.models.ingredient import Ingredient
 from app.models.product import Product, ProductIngredientLink
+from app.models.discount import Discount
 
 target_metadata = SQLModel.metadata
 
