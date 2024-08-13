@@ -24,6 +24,7 @@ from app.models.enums import *
 from app.models.ingredient import Ingredient
 from app.models.product import Product, ProductIngredientLink
 from app.models.discount import Discount
+from app.models.mark import Mark, MarkWorkingHours
 
 target_metadata = SQLModel.metadata
 

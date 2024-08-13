@@ -11,3 +11,18 @@ class DiscountOpenType(str, enum.Enum):
     browser = "browser"
     browser_tab = "browser_tab"
     deeplink = "deeplink"
+
+
+class Day(enum.Enum):
+    monday = "monday"
+    tuesday = "tuesday"
+    wednesday = "wednesday"
+    thursday = "thursday"
+    friday = "friday"
+    saturday = "saturday"
+    sunday = "sunday"
+
+
+class WorkType(str, enum.Enum):
+    default = "default"
+    delivery = "delivery"
