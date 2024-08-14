@@ -22,7 +22,7 @@ from sqlmodel import SQLModel
 from app.models.category import Category, CategoryTranslation
 from app.models.enums import *
 from app.models.ingredient import Ingredient
-from app.models.product import Product, ProductIngredientLink
+from app.models.product import Product, ProductIngredientLink, ProductTranslation
 from app.models.discount import Discount
 from app.models.mark import Mark, MarkWorkingHours
 

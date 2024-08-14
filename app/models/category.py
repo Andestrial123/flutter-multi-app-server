@@ -34,6 +34,8 @@ class Category(CategoryReadBase, table=True):
 
 class CategoryTranslation(TranslationBase, table=True):
     __tablename__ = "category_translation"
+    id: Optional[uuid.UUID] = Field(default=uuid.uuid4, primary_key=True, foreign_key="category.id")
+
     name: str
 
     category: Category = Relationship(back_populates="translations")
