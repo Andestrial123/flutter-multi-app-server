@@ -3,9 +3,11 @@ from typing import Optional, List
 
 from sqlmodel import SQLModel, Field, Relationship
 
+from app.models.translation import TranslationBase
+
 
 class CategoryCreateBase(SQLModel):
-    name: str
+    pass
 
 
 class CategoryUpdateBase(CategoryCreateBase):
@@ -19,3 +21,19 @@ class CategoryReadBase(CategoryUpdateBase):
 
 class Category(CategoryReadBase, table=True):
     products: List["Product"] = Relationship(back_populates="category")
+    translations: List["CategoryTranslation"] = Relationship(back_populates="category")
+    translation: Optional["CategoryTranslation"] = Relationship()
+
+    @property
+    def name(self) -> str:
+        if not self.translation:
+            return ""
+
+        return self.translation.name
+
+
+class CategoryTranslation(TranslationBase, table=True):
+    __tablename__ = "category_translation"
+    name: str
+
+    category: Category = Relationship(back_populates="translations")

@@ -26,3 +26,8 @@ class Day(enum.Enum):
 class WorkType(str, enum.Enum):
     default = "default"
     delivery = "delivery"
+
+
+class LanguageCode(str, enum.Enum):
+    en = "en"
+    uk = "uk"
